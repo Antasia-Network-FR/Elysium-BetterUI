@@ -1,3 +1,6 @@
+# Fork of RespawnTimer for the Elysium SCP: Secret Lab RP server
+
+# Readme.md of RespawnTimer
 # RespawnTimer ![Downloads](https://img.shields.io/github/downloads/Michal78900/RespawnTimer/total)
 A SCP: Secret Laboratory plugin that shows when the next respawn wave will happen.
 
