@@ -17,11 +17,11 @@ public partial class TimerView
     {
         SetRoundTime();
         SetMinutesAndSeconds();
-        SetSpectatorCountAndSpawnChance(spectatorCount);
-        SetWarheadStatus();
-        SetGeneratorCount();
-        SetTpsAndTickrate();
-        SetHint();
+        // SetSpectatorCountAndSpawnChance(spectatorCount);
+        // SetWarheadStatus();
+        // SetGeneratorCount();
+        // SetTpsAndTickrate();
+        // SetHint();
     }
 
     private void SetRoundTime()
@@ -58,7 +58,7 @@ public partial class TimerView
         }
     }
 
-    private void SetSpectatorCountAndSpawnChance(int? spectatorCount = null)
+    /* private void SetSpectatorCountAndSpawnChance(int? spectatorCount = null)
     {
         StringBuilder.Replace("{spectators_num}", spectatorCount?.ToString() ?? Player.List.Count(x => x.Role.Team == Team.Dead && !x.IsOverwatchEnabled).ToString());
 
@@ -96,7 +96,7 @@ public partial class TimerView
 
         StringBuilder.Replace("{generator_engaged}", generatorEngaged.ToString());
         StringBuilder.Replace("{generator_count}", generatorCount.ToString());
-        */
+        */ /*
         StringBuilder.Replace("{generator_engaged}", Scp079Recontainer.AllGenerators.Count(x => x.Engaged).ToString());
         StringBuilder.Replace("{generator_count}", "3");
     }
@@ -113,5 +113,5 @@ public partial class TimerView
             return;
 
         StringBuilder.Replace("{hint}", Hints[HintIndex]);
-    }
+    } */
 }

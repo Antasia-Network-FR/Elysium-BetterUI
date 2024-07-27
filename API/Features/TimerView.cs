@@ -13,16 +13,16 @@
     {
         public static readonly Dictionary<string, TimerView> CachedTimers = new();
 
-        public int HintIndex { get; private set; }
+        // public int HintIndex { get; private set; }
 
-        private int HintInterval { get; set; }
+        // private int HintInterval { get; set; }
 
         public static void AddTimer(string name)
         {
             if (CachedTimers.ContainsKey(name))
                 return;
 
-            string directoryPath = Path.Combine(RespawnTimer.RespawnTimerDirectoryPath, name);
+            string directoryPath = Path.Combine(BetterUI.RespawnTimerDirectoryPath, name);
             if (!Directory.Exists(directoryPath))
             {
                 Log.Error($"{name} directory does not exist!");
@@ -50,16 +50,23 @@
                 File.WriteAllText(propertiesPath, YamlParser.Serializer.Serialize(new Properties()));
             }
 
+            /* 
             string hintsPath = Path.Combine(directoryPath, "Hints.txt");
             List<string> hints = new();
             if (File.Exists(hintsPath))
                 hints.AddRange(File.ReadAllLines(hintsPath));
-
+            
             TimerView timerView = new(
                 File.ReadAllText(timerBeforePath),
                 File.ReadAllText(timerDuringPath),
                 YamlParser.Deserializer.Deserialize<Properties>(File.ReadAllText(propertiesPath)),
                 hints);
+            */
+
+            TimerView timerView = new(
+                File.ReadAllText(timerBeforePath),
+                File.ReadAllText(timerDuringPath),
+                YamlParser.Deserializer.Deserialize<Properties>(File.ReadAllText(propertiesPath)));
 
             CachedTimers.Add(name, timerView);
         }
@@ -69,21 +76,21 @@
             string groupName = !ServerStatic.PermissionsHandler._members.TryGetValue(player.UserId, out string str) ? null : str;
 
             // Check by group name
-            if (groupName is not null && RespawnTimer.Singleton.Config.Timers.TryGetValue(groupName, out string timerName))
+            if (groupName is not null && BetterUI.Singleton.Config.Timers.TryGetValue(groupName, out string timerName))
             {
                 timerView = CachedTimers[timerName];
                 return true;
             }
 
             // Check by user id
-            if (RespawnTimer.Singleton.Config.Timers.TryGetValue(player.UserId, out timerName))
+            if (BetterUI.Singleton.Config.Timers.TryGetValue(player.UserId, out timerName))
             {
                 timerView = CachedTimers[timerName];
                 return true;
             }
 
             // Use fallback default timer
-            if (RespawnTimer.Singleton.Config.Timers.TryGetValue("default", out timerName))
+            if (BetterUI.Singleton.Config.Timers.TryGetValue("default", out timerName))
             {
                 timerView = CachedTimers[timerName];
                 return true;
@@ -109,7 +116,7 @@
             return StringBuilder.ToString();
         }
 
-        internal void IncrementHintInterval()
+        /* internal void IncrementHintInterval()
         {
             HintInterval++;
             if (HintInterval != Properties.HintInterval)
@@ -126,13 +133,23 @@
                 HintIndex = 0;
         }
 
-        private TimerView(string beforeRespawnString, string duringRespawnString, Properties properties, List<string> hints)
+        */
+
+        private TimerView(string beforeRespawnString, string duringRespawnString, Properties properties)
+        {
+            BeforeRespawnString = beforeRespawnString;
+            DuringRespawnString = duringRespawnString;
+            Properties = properties;
+        }
+
+        /* private TimerView(string beforeRespawnString, string duringRespawnString, Properties properties, List<string> hints)
         {
             BeforeRespawnString = beforeRespawnString;
             DuringRespawnString = duringRespawnString;
             Properties = properties;
             Hints = hints;
         }
+        */
 
         public string BeforeRespawnString { get; }
 
@@ -140,7 +157,7 @@
 
         public Properties Properties { get; }
 
-        public List<string> Hints { get; }
+        // public List<string> Hints { get; }
 
         private readonly StringBuilder StringBuilder = new(1024);
     }

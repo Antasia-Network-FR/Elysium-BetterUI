@@ -11,18 +11,18 @@
     public class EventHandler
     {
         private CoroutineHandle _timerCoroutine;
-        private CoroutineHandle _hintsCoroutine;
+        // private CoroutineHandle _hintsCoroutine;
 
         internal void OnGenerated()
         {
-            if (RespawnTimer.Singleton.Config.ReloadTimerEachRound)
-                RespawnTimer.Singleton.OnReloaded();
+            if (BetterUI.Singleton.Config.ReloadTimerEachRound)
+                BetterUI.Singleton.OnReloaded();
 
             if (_timerCoroutine.IsRunning)
                 Timing.KillCoroutines(_timerCoroutine);
 
-            if (_hintsCoroutine.IsRunning)
-                Timing.KillCoroutines(_hintsCoroutine);
+            // if (_hintsCoroutine.IsRunning)
+            //    Timing.KillCoroutines(_hintsCoroutine);
         }
 
         internal void OnRoundStart()
@@ -30,7 +30,7 @@
             try
             {
                 _timerCoroutine = Timing.RunCoroutine(TimerCoroutine());
-                _hintsCoroutine = Timing.RunCoroutine(HintsCoroutine());
+                // _hintsCoroutine = Timing.RunCoroutine(HintsCoroutine());
             }
             catch (Exception e)
             {
@@ -41,7 +41,7 @@
 
         internal void OnDying(DyingEventArgs ev)
         {
-            if (RespawnTimer.Singleton.Config.TimerDelay < 0)
+            if (BetterUI.Singleton.Config.TimerDelay < 0)
                 return;
 
             if (PlayerDeathDictionary.ContainsKey(ev.Player))
@@ -50,7 +50,7 @@
                 PlayerDeathDictionary.Remove(ev.Player);
             }
 
-            PlayerDeathDictionary.Add(ev.Player, Timing.CallDelayed(RespawnTimer.Singleton.Config.TimerDelay, () => PlayerDeathDictionary.Remove(ev.Player)));
+            PlayerDeathDictionary.Add(ev.Player, Timing.CallDelayed(BetterUI.Singleton.Config.TimerDelay, () => PlayerDeathDictionary.Remove(ev.Player)));
         }
 
         private IEnumerator<float> TimerCoroutine()
@@ -70,7 +70,7 @@
                         if (player.IsAlive && !player.SessionVariables.ContainsKey("IsGhost"))
                             continue;
 
-                        if (player.IsOverwatchEnabled && RespawnTimer.Singleton.Config.HideTimerForOverwatch)
+                        if (player.IsOverwatchEnabled && BetterUI.Singleton.Config.HideTimerForOverwatch)
                             continue;
 
                         if (API.API.TimerHidden.Contains(player.UserId))
@@ -104,7 +104,7 @@
             }
         }
 
-        private IEnumerator<float> HintsCoroutine()
+        /* private IEnumerator<float> HintsCoroutine()
         {
             while (true)
             {
@@ -116,7 +116,7 @@
                 if (RoundSummary.singleton._roundEnded)
                     break;
             }
-        }
+        } */
 
         private readonly Dictionary<Player, CoroutineHandle> PlayerDeathDictionary = new(25);
     }
