@@ -23,12 +23,7 @@
             _shower = null;
             IsActive = false;
 
-            IEnumerable<Assembly> assemblies =
-#if EXILED
-            Exiled.Loader.Loader.Dependencies;
-#else
-            PluginAPI.Loader.AssemblyLoader.Dependencies;
-#endif
+            IEnumerable<Assembly> assemblies = Exiled.Loader.Loader.Dependencies;
 
             Assembly assembly = assemblies.FirstOrDefault(x => x.GetName().Name == RUEINAME);
             if (assembly == null)

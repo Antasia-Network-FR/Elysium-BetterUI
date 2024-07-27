@@ -11,29 +11,28 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(Configuration)' == 'NWAPI' ">
-        <TargetName>RespawnTimer-NW</TargetName>
-    </PropertyGroup>
     
     <ItemGroup>
-        <Reference Include="Assembly-CSharp-firstpass" HintPath="$(EXILED_REFERENCES)\Assembly-CSharp-firstpass.dll" />
-        <Reference Include="UnityEngine" HintPath="$(EXILED_REFERENCES)\UnityEngine.dll" />
-        <Reference Include="UnityEngine.CoreModule" HintPath="$(EXILED_REFERENCES)\UnityEngine.CoreModule.dll" />
-        <Reference Include="UnityEngine.PhysicsModule" HintPath="$(EXILED_REFERENCES)\UnityEngine.PhysicsModule.dll" />
-        <Reference Include="Mirror" HintPath="$(EXILED_REFERENCES)\Mirror.dll" />
-        <Reference Include="YamlDotNet" HintPath="$(EXILED_REFERENCES)\YamlDotNet.dll" />
-    </ItemGroup>
-    
-    <ItemGroup Condition=" '$(Configuration)' == 'NWAPI' ">
-        <Reference Include="Assembly-CSharp" HintPath="$(EXILED_REFERENCES)\Assembly-CSharp-Publicized.dll" />
-        <Reference Include="NorthwoodLib" HintPath="$(EXILED_REFERENCES)\NorthwoodLib.dll" />
-        <Reference Include="CommandSystem.Core" HintPath="$(EXILED_REFERENCES)\CommandSystem.Core.dll" />
+        <Reference Include="Assembly-CSharp-firstpass">
+          <HintPath>..\..\ExiledProject\Dependcies\Assembly-CSharp-firstpass.dll</HintPath>
+        </Reference>
+        <Reference Include="Mirror">
+          <HintPath>..\..\Dependcies\Mirror.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine">
+          <HintPath>..\..\ExiledProject\Dependcies\UnityEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+          <HintPath>..\..\ExiledProject\Dependcies\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.PhysicsModule">
+          <HintPath>..\..\ExiledProject\Dependcies\UnityEngine.PhysicsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="YamlDotNet" HintPath="..\..ExiledProject\Dependcies\YamlDotNet.dll" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Condition=" '$(Configuration)' == 'EXILED' " Include="EXILED" Version="8.9.6" />
-        <PackageReference Condition=" '$(Configuration)' == 'NWAPI' " Include="Northwood.PluginAPI" Version="13.1.2" />
+        <PackageReference Include="EXILEDOFFICIAL" Version="8.11.0" />
     </ItemGroup>
 
 </Project>

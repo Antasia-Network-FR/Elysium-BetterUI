@@ -2,11 +2,7 @@
 {
     using CommandSystem;
     using System;
-#if EXILED
     using Exiled.API.Features;
-#else
-    using PluginAPI.Core;
-#endif
 
     using static API.API;
 
@@ -17,7 +13,7 @@
 
         public string[] Aliases => Array.Empty<string>();
 
-        public string Description => "Shows / hides RespawnTimer.";
+        public string Description => "Affiche / cache RespawnTimer.";
 
         public bool SanitizeResponse => false;
 
@@ -29,11 +25,11 @@
             {
                 TimerHidden.Add(userId);
 
-                response = "<color=red>Respawn Timer has been hidden!</color>";
+                response = "<color=red>Les informations de spectateurs ont été caché !</color>";
                 return true;
             }
 
-            response = "<color=green>Respawn Timer has been shown!</color>";
+            response = "<color=green>Les informations de spectateurs ont été révéllé !</color>";
             return true;
         }
     }
